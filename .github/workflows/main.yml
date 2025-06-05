@@ -1,0 +1,31 @@
+name: Deploy to Proxmox VM
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Proxmox VM via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_SSH_HOST }}
+          username: ${{ secrets.VM_SSH_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            ssh -tt -i ~/.ssh/nginxkey ${{ secrets.VM_SSH_USER }}@${{ secrets.VM_SSH_GATEWAY }} << EOF
+            cd ~/AreBillsPaid
+            eval "\$(ssh-agent -s)"
+            ssh-add ~/.ssh/nginxkey
+            git pull origin master
+            docker compose down
+            docker compose up --build -d
+            pkill ssh-agent
+            exit
+            EOF
