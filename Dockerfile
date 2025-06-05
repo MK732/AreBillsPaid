@@ -12,7 +12,7 @@ RUN npm ci --cache .npm --prefer-offline
 COPY . .
 
 # Build Next.js for production
-RUN npx prisma generate && npx next build
+RUN npm install && npx prisma generate && npx next build
 
 # Expose Next.js default port
 EXPOSE 3000
