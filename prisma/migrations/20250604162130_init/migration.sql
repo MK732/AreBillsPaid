@@ -1,0 +1,6 @@
+-- CreateTable
+CREATE TABLE "Bill" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "paidAt" DATETIME
+);
