@@ -20,6 +20,11 @@
 
 BillsPaid is a comprehensive bill management application that helps you keep track of your monthly expenses, due dates, and payment history. With its intuitive interface and powerful analytics, you'll never miss a payment again!
 
+<div align="center">
+  <img src="./assets/screenshots/BillsCheck.png" alt="Bills Management Interface" width="45%" style="margin: 10px;">
+  <img src="./assets/screenshots/FinancialDash.png" alt="Financial Analytics Dashboard" width="45%" style="margin: 10px;">
+</div>
+
 ## 🚀 Features
 
 ### 💸 Bill Management
@@ -28,11 +33,21 @@ BillsPaid is a comprehensive bill management application that helps you keep tra
 - **Category Organization** - Organize bills by categories (utilities, subscriptions, etc.)
 - **Payment History** - Track all your payments with detailed records
 
+<div align="center">
+  <img src="./assets/screenshots/BillsCheck.png" alt="Bills Management Screenshot" width="600px">
+  <p><em>Intuitive bill management interface with easy-to-use controls</em></p>
+</div>
+
 ### 📊 Analytics Dashboard
 - **Spending Insights** - Visualize your spending patterns and trends
 - **Category Breakdown** - See where your money goes by category
 - **Payment Analytics** - Track payment history and patterns
 - **Monthly Reports** - Comprehensive monthly spending summaries
+
+<div align="center">
+  <img src="./assets/screenshots/FinancialDash.png" alt="Analytics Dashboard Screenshot" width="600px">
+  <p><em>Comprehensive analytics dashboard with spending insights and trends</em></p>
+</div>
 
 ### 🎨 User Experience
 - **Modern UI/UX** - Beautiful gradient design with smooth animations
