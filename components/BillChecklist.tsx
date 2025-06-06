@@ -25,6 +25,102 @@ const CATEGORY_ICONS = {
   "Other": "📋"
 };
 
+// Company domain mapping for logo API
+const getCompanyDomain = (billName: string): string | null => {
+  const name = billName.toLowerCase();
+  
+  // Telecom/Internet
+  if (name.includes('verizon')) return 'verizon.com';
+  if (name.includes('att') || name.includes('at&t')) return 'att.com';
+  if (name.includes('tmobile') || name.includes('t-mobile')) return 't-mobile.com';
+  if (name.includes('sprint')) return 'sprint.com';
+  if (name.includes('xfinity')) return 'xfinity.com';
+  if (name.includes('comcast')) return 'comcast.com';
+  if (name.includes('spectrum')) return 'spectrum.com';
+  if (name.includes('charter')) return 'charter.com';
+  if (name.includes('cox')) return 'cox.com';
+  if (name.includes('optimum')) return 'optimum.com';
+  if (name.includes('altice')) return 'alticeusa.com';
+  
+  // Credit Cards & Banks
+  if (name.includes('chase')) return 'chase.com';
+  if (name.includes('discover')) return 'discover.com';
+  if (name.includes('capital one') || name.includes('capitalone')) return 'capitalone.com';
+  if (name.includes('american express') || name.includes('amex')) return 'americanexpress.com';
+  if (name.includes('citi') || name.includes('citibank')) return 'citibank.com';
+  if (name.includes('wells fargo') || name.includes('wellsfargo')) return 'wellsfargo.com';
+  if (name.includes('bank of america') || name.includes('boa')) return 'bankofamerica.com';
+  if (name.includes('usaa')) return 'usaa.com';
+  if (name.includes('navy federal')) return 'navyfederal.org';
+  
+  // Utilities
+  if (name.includes('pge') || name.includes('pacific gas')) return 'pge.com';
+  if (name.includes('edison') || name.includes('sce')) return 'sce.com';
+  if (name.includes('duke energy')) return 'duke-energy.com';
+  if (name.includes('georgia power')) return 'georgiapower.com';
+  if (name.includes('pepco')) return 'pepco.com';
+  if (name.includes('sdge')) return 'sdge.com';
+  if (name.includes('con ed') || name.includes('coned')) return 'coned.com';
+  
+  // Streaming/Subscriptions
+  if (name.includes('netflix')) return 'netflix.com';
+  if (name.includes('spotify')) return 'spotify.com';
+  if (name.includes('apple') && (name.includes('music') || name.includes('tv') || name.includes('icloud'))) return 'apple.com';
+  if (name.includes('amazon') && name.includes('prime')) return 'amazon.com';
+  if (name.includes('disney') || name.includes('disney+')) return 'disney.com';
+  if (name.includes('hulu')) return 'hulu.com';
+  if (name.includes('hbo')) return 'hbo.com';
+  if (name.includes('max') && (name.includes('streaming') || name.includes('tv'))) return 'max.com';
+  if (name.includes('youtube')) return 'youtube.com';
+  if (name.includes('twitch')) return 'twitch.tv';
+  if (name.includes('paramount')) return 'paramount.com';
+  if (name.includes('peacock')) return 'peacocktv.com';
+  
+  // Insurance
+  if (name.includes('geico')) return 'geico.com';
+  if (name.includes('state farm')) return 'statefarm.com';
+  if (name.includes('allstate')) return 'allstate.com';
+  if (name.includes('progressive')) return 'progressive.com';
+  if (name.includes('farmers')) return 'farmers.com';
+  if (name.includes('liberty mutual')) return 'libertymutual.com';
+  
+  // Additional popular companies
+  if (name.includes('microsoft')) return 'microsoft.com';
+  if (name.includes('google')) return 'google.com';
+  if (name.includes('adobe')) return 'adobe.com';
+  if (name.includes('dropbox')) return 'dropbox.com';
+  if (name.includes('slack')) return 'slack.com';
+  if (name.includes('zoom')) return 'zoom.us';
+  if (name.includes('bestbuy') || name.includes('best buy')) return 'bestbuy.com';
+  
+  return null;
+};
+
+// Get company logo URL using Clearbit Logo API
+const getCompanyLogoUrl = (billName: string): string | null => {
+  const domain = getCompanyDomain(billName);
+  if (domain) {
+    return `https://logo.clearbit.com/${domain}`;
+  }
+  return null;
+};
+
+// Fallback emoji for when logo fails to load
+const getFallbackIcon = (billName: string, category: string): string => {
+  const name = billName.toLowerCase();
+  
+  // Category-based fallbacks
+  if (category === 'Phone/Internet' || name.includes('phone') || name.includes('internet')) return '📱';
+  if (category === 'Credit Cards' || name.includes('credit') || name.includes('card')) return '💳';
+  if (category === 'Utilities' || name.includes('electric') || name.includes('gas') || name.includes('water')) return '⚡';
+  if (category === 'Insurance' || name.includes('insurance')) return '🛡️';
+  if (category === 'Subscriptions' || name.includes('subscription') || name.includes('streaming')) return '📺';
+  if (category === 'Rent/Mortgage' || name.includes('rent') || name.includes('mortgage')) return '🏠';
+  if (category === 'Loans' || name.includes('loan')) return '🏦';
+  
+  return '📄';
+};
+
 export default function BillsChecklist() {
   const [bills, setBills] = useState<Bill[]>([]);
   const [newBill, setNewBill] = useState("");
@@ -535,7 +631,30 @@ export default function BillsChecklist() {
                             <div className="flex items-start justify-between">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
-                                  <h4 className="text-base font-semibold text-slate-900 truncate">{bill.name}</h4>
+                                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                                    <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                                      {getCompanyLogoUrl(bill.name) ? (
+                                        <img
+                                          src={getCompanyLogoUrl(bill.name)!}
+                                          alt={`${bill.name} logo`}
+                                          className="w-10 h-10 rounded object-contain"
+                                          onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.style.display = 'none';
+                                            const fallback = target.nextElementSibling as HTMLSpanElement;
+                                            if (fallback) fallback.style.display = 'inline';
+                                          }}
+                                        />
+                                      ) : null}
+                                      <span 
+                                        className="text-2xl"
+                                        style={{ display: getCompanyLogoUrl(bill.name) ? 'none' : 'inline' }}
+                                      >
+                                        {getFallbackIcon(bill.name, bill.category)}
+                                      </span>
+                                    </div>
+                                    <h4 className="text-base font-semibold text-slate-900 truncate">{bill.name}</h4>
+                                  </div>
                                   {isOverdue(bill) && (
                                     <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 flex-shrink-0">
                                       Overdue
