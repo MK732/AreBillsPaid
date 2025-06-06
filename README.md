@@ -1,36 +1,175 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 BillsPaid - Smart Bill Management App
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+
+**A beautiful, modern web application for tracking and managing your bills with intelligent analytics**
+
+[🚀 Features](#-features) • [💻 Tech Stack](#-tech-stack) • [⚡ Quick Start](#-quick-start) • [📱 Usage](#-usage) • [🐳 Docker](#-docker-support)
+
+</div>
+
+---
+
+## 🌟 Overview
+
+BillsPaid is a comprehensive bill management application that helps you keep track of your monthly expenses, due dates, and payment history. With its intuitive interface and powerful analytics, you'll never miss a payment again!
+
+## 🚀 Features
+
+### 💸 Bill Management
+- **Smart Bill Tracking** - Add, edit, and organize all your bills in one place
+- **Due Date Reminders** - Never miss a payment with visual due date indicators
+- **Category Organization** - Organize bills by categories (utilities, subscriptions, etc.)
+- **Payment History** - Track all your payments with detailed records
+
+### 📊 Analytics Dashboard
+- **Spending Insights** - Visualize your spending patterns and trends
+- **Category Breakdown** - See where your money goes by category
+- **Payment Analytics** - Track payment history and patterns
+- **Monthly Reports** - Comprehensive monthly spending summaries
+
+### 🎨 User Experience
+- **Modern UI/UX** - Beautiful gradient design with smooth animations
+- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- **Real-time Updates** - Instant updates without page refreshes
+- **Intuitive Navigation** - Easy-to-use tabbed interface
+
+## 💻 Tech Stack
+
+| Technology |
+|------------|
+| **Next.js** |
+| **TypeScript**| 
+| **Prisma** |
+| **SQLite** |
+
+
+## ⚡ Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/MK732/AreBillsPaid.git
+   cd billspaid
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Set up the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📱 Usage
+
+### Adding Bills
+1. Navigate to the **Bills Checklist** tab
+2. Click "Add New Bill" button
+3. Fill in bill details (name, amount, due date, category)
+4. Save and start tracking!
+
+### Recording Payments
+1. Find your bill in the checklist
+2. Click the payment button
+3. Enter payment amount and date
+4. Your payment history is automatically updated
+
+### Viewing Analytics
+1. Switch to the **Analytics** tab
+2. Explore your spending patterns
+3. View category breakdowns
+4. Analyze payment trends
+
+## 🐳 Docker Support
+
+The application includes Docker support for easy deployment:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Build and run with Docker Compose
+docker-compose up --build
+
+# Or build manually
+docker build -t billspaid .
+docker run -p 3000:3000 billspaid
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📁 Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+billspaid/
+├── app/                 # Next.js App Router
+│   ├── globals.css     # Global styles
+│   ├── api/            # API routes
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/         # React components
+│   ├── Analytics.tsx   # Analytics dashboard
+│   └── BillChecklist.tsx # Bill management
+├── prisma/            # Database
+│   ├── schema.prisma  # Database schema
+│   └── dev.db         # SQLite database
+├── public/            # Static assets
+└── ...config files
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Development
 
-## Learn More
+### Database Operations
+```bash
+# Generate Prisma client
+npx prisma generate
 
-To learn more about Next.js, take a look at the following resources:
+# Push schema changes
+npx prisma db push
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# View database
+npx prisma studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Building for Production
+```bash
+npm run build
+npm start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<div align="center">
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+*Keep your bills organized, your payments on time, and your finances under control!*
+
+</div>
