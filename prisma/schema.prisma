@@ -8,7 +8,19 @@ datasource db {
 }
 
 model Bill {
-  id      Int      @id @default(autoincrement())
-  name    String
-  paidAt  DateTime?
+  id       Int       @id @default(autoincrement())
+  name     String
+  category String    @default("Other")
+  dueDate  DateTime?
+  amount   Float?
+  createdAt DateTime @default(now())
+  payments Payment[]
+}
+
+model Payment {
+  id       Int      @id @default(autoincrement())
+  billId   Int
+  amount   Float
+  paidAt   DateTime @default(now())
+  bill     Bill     @relation(fields: [billId], references: [id], onDelete: Cascade)
 }
